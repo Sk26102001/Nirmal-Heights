@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-burgundy: #451B0E;
+  --secondary-gold: #C9A45C;
+  --bg-ivory: #F8F5EF;
+  --text-charcoal: #24211E;
+  --accent-beige: #E8DDCA;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #F8F5EF;
+  color: #24211E;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  font-family: var(--font-inter), sans-serif;
+  background-color: #F8F5EF;
+  color: #24211E;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Selection */
+::selection {
+  background-color: #C9A45C;
+  color: #1A0A05;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1C0904;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A45C;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #DFBF7A;
+}
+
+/* Luxury Typography Classes */
+.font-editorial {
+  font-family: var(--font-cormorant), 'Playfair Display', Georgia, serif;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F3E9D4 0%, #C9A45C 50%, #9E7B34 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border {
+  border-color: rgba(201, 164, 92, 0.3);
+}
+
+.gold-glow {
+  box-shadow: 0 0 25px rgba(201, 164, 92, 0.25);
+}
+
+/* GSAP Smooth container helpers */
+.clip-mask-init {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+}
+
+/* Hide scrollbar for clean horizontal panels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

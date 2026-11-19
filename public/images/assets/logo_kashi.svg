@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240">
+  <defs>
+    <linearGradient id="goldLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#DFBF7A" />
+      <stop offset="50%" stopColor="#C9A45C" />
+      <stop offset="100%" stopColor="#9E7B34" />
+    </linearGradient>
+  </defs>
+  <!-- Architectural Spire / Kalash Symbol -->
+  <g transform="translate(170, 10)">
+    <path d="M 30 0 L 33 15 L 45 25 L 35 32 L 30 50 L 25 32 L 15 25 L 27 15 Z" fill="url(#goldLogoGrad)" />
+  </g>
+  <!-- Devanagari "काशी" -->
+  <text x="200" y="110" text-anchor="middle" font-family="'Times New Roman', serif" font-weight="600" font-size="48" fill="url(#goldLogoGrad)" letter-spacing="4">काशी</text>
+  <!-- English "NIRMAL HEIGHTS" -->
+  <text x="200" y="165" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-weight="500" font-size="34" fill="#FFFFFF" letter-spacing="6">NIRMAL</text>
+  <text x="200" y="200" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-weight="400" font-size="28" fill="#FFFFFF" letter-spacing="8">HEIGHTS</text>
+  <!-- Location Varanasi -->
+  <text x="200" y="225" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="600" font-size="11" fill="url(#goldLogoGrad)" letter-spacing="5">VARANASI</text>
+</svg>

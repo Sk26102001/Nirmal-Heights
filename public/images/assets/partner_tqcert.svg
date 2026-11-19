@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120" width="340" height="120">
+  <!-- TQ Emblem -->
+  <g transform="translate(20, 15)">
+    <rect x="0" y="0" width="45" height="45" rx="8" fill="#1B4F8B" />
+    <text x="8" y="33" font-family="system-ui, sans-serif" font-weight="900" font-size="26" fill="#FFF">TQ</text>
+    <circle cx="68" cy="22" r="22" fill="#D32F2F" />
+    <text x="54" y="32" font-family="system-ui, sans-serif" font-weight="900" font-size="22" fill="#FFF">Cert</text>
+  </g>
+  <!-- TATA Enterprise Subtext -->
+  <g transform="translate(20, 75)">
+    <text x="0" y="16" font-family="system-ui, sans-serif" font-weight="700" font-size="12" fill="#444" letter-spacing="1.5">A </text>
+    <text x="16" y="16" font-family="system-ui, sans-serif" font-weight="900" font-size="14" fill="#1B4F8B" letter-spacing="2">TATA </text>
+    <text x="64" y="16" font-family="system-ui, sans-serif" font-weight="700" font-size="12" fill="#444" letter-spacing="1.5">Enterprise</text>
+  </g>
+</svg>

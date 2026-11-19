@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <!-- Devanagari Hindi Text -->
+  <g transform="translate(15, 20)">
+    <text x="0" y="32" font-family="serif" font-weight="700" font-size="18" fill="#800000">भारतीय</text>
+    <text x="0" y="54" font-family="serif" font-weight="700" font-size="18" fill="#800000">प्रौद्योगिकी</text>
+    <text x="0" y="76" font-family="serif" font-weight="700" font-size="18" fill="#800000">संस्थान</text>
+  </g>
+  <!-- IIT Bold Logo -->
+  <g transform="translate(100, 18)">
+    <text x="0" y="65" font-family="Impact, system-ui, sans-serif" font-weight="900" font-size="70" fill="#800000" letter-spacing="2">IIT</text>
+  </g>
+  <!-- English Subtext -->
+  <g transform="translate(210, 32)">
+    <text x="0" y="20" font-family="system-ui, sans-serif" font-weight="800" font-size="15" fill="#24211E" letter-spacing="1">INDIAN</text>
+    <text x="0" y="38" font-family="system-ui, sans-serif" font-weight="800" font-size="15" fill="#24211E" letter-spacing="1">INSTITUTE OF</text>
+    <text x="0" y="56" font-family="system-ui, sans-serif" font-weight="800" font-size="15" fill="#24211E" letter-spacing="1">TECHNOLOGY</text>
+  </g>
+</svg>
