@@ -5,6 +5,12 @@ import Link from "next/link";
 import { Menu, X, ArrowRight, Phone, Download, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
+interface NavLink {
+  name: string;
+  href: string;
+  hasDropdown?: boolean;
+}
+
 interface NavbarProps {
   onOpenBookVisit?: () => void;
   onOpenBrochure?: () => void;
@@ -27,10 +33,11 @@ export default function Navbar({ onOpenBookVisit, onOpenBrochure }: NavbarProps)
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
-    { name: "Residences", href: "#residences", hasDropdown: true },
+    { name: "Residences", href: "#residences" },
+    { name: "Floor Plans", href: "#floor-plans" },
     { name: "Amenities", href: "#amenities" },
     { name: "Contact", href: "#contact" },
   ];

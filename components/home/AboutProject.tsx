@@ -3,8 +3,9 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck, KeyRound, Gem, Play, ArrowRight, Sparkles, Building } from "lucide-react";
+import { ShieldCheck, KeyRound, Gem, Play, ArrowRight, Sparkles } from "lucide-react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { DEVELOPER_PARTNERS_LOGO } from "@/lib/developerLogo";
 
 interface AboutProps {
   onOpenVideo?: () => void;
@@ -97,18 +98,7 @@ export default function AboutProject({ onOpenVideo, onOpenBrochure }: AboutProps
       ref={containerRef}
       className="relative py-24 md:py-36 bg-[#F8F5EF] text-[#24211E] overflow-hidden"
     >
-      {/* Subtle Varanasi Temple Ghat Watermark Background */}
-      <div
-        ref={watermarkRef}
-        className="absolute top-10 left-0 w-80 h-96 opacity-10 pointer-events-none select-none"
-      >
-        <Image
-          src="/images/assets/temple_ghat_watermark.jpg"
-          alt="Varanasi Watermark"
-          fill
-          className="object-contain object-left-top"
-        />
-      </div>
+
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -152,8 +142,21 @@ export default function AboutProject({ onOpenVideo, onOpenBrochure }: AboutProps
               </span>
             </div>
 
+            {/* Visionary Joint Developers Showcase - Exclusive Large View */}
+
+
+            {/* Large View Logo */}
+            <div className="w-full flex items-center justify-center py-2 transition-transform duration-300 group-hover:scale-[1.03]">
+              <img
+                src={DEVELOPER_PARTNERS_LOGO}
+                alt="Shivyatan Group & Aaditri Joint Developers"
+                className="h-20 sm:h-24 md:h-28 w-auto max-w-[340px] sm:max-w-[400px] object-contain drop-shadow-2xl"
+              />
+            </div>
+
+
             {/* 3 Prominent Verified Badges */}
-            <div className="about-fade-item grid grid-cols-3 gap-3 pt-2 pb-2">
+            <div className="about-fade-item grid grid-cols-3 gap-3 pt-1 pb-1">
               <div className="p-4 rounded-xl bg-white border border-[#E8DDCA] shadow-sm flex flex-col items-center text-center group hover:border-[#C9A45C] transition-all duration-300">
                 <div className="w-10 h-10 rounded-full bg-[#FAF5EE] border border-[#C9A45C]/30 flex items-center justify-center text-[#451B0E] mb-2 group-hover:scale-110 transition-transform duration-300">
                   <ShieldCheck className="w-5 h-5 text-[#C9A45C]" />

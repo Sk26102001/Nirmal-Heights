@@ -145,17 +145,17 @@ export const RESIDENCES_DATA: Residence[] = [
     bentoSpan: "col-span-12 sm:col-span-6 lg:col-span-3 row-span-1",
   },
   {
-    id: "kitchen-balcony",
-    type: "Gourmet Kitchen",
-    name: "Chef's Kitchen & Sunset Deck",
-    carpetArea: "Modular kitchen with utility balcony",
-    balconies: "Dedicated dry balcony & sunrise view",
+    id: "piano-salon",
+    type: "Music & Salon",
+    name: "Grand Piano Salon & Cultural Lounge",
+    carpetArea: "Acoustic music salon & library retreat",
+    balconies: "Panoramic running sundeck balcony",
     features: [
-      "Polished granite slab countertops",
-      "Pre-fitted chimney & pipeline gas provisioning",
-      "Stainless steel sink with drain board",
+      "Opulent white grand piano acoustic recital salon",
+      "Floor-to-ceiling French drapes & bespoke classical finishes",
+      "Italian marble flooring & curated artistic wall paneling",
     ],
-    image: "/images/assets/residence_kitchen.jpg",
+    image: "/images/assets/residence_piano_salon.jpg",
     bentoSpan: "col-span-12 lg:col-span-3 row-span-2",
   },
 ];
@@ -395,7 +395,7 @@ export const FLOOR_PLANS_DATA: FloorPlanItem[] = [
     balconyArea: "NH-19 Highway Access",
     coveredArea: "Township Master Plan",
     facing: "North-East Facing",
-    image: "/images/brochure/authentic_site_plan_vda.jpg",
+    image: "/images/brochure/spread_site_plan_vda_hd.jpg",
     details: "Authentic VDA Approved Master Site Plan at Transport Nagar, Varanasi. Highlights Tower A (B1+B2+S+30), Tower B (B1+B2+S+29), Future Towers C & D, swimming pool, tennis court, basketball court, basement parking ramps, 8000mm wide internal roads, and direct access to NH-19 Highway.",
   },
   {
@@ -509,6 +509,65 @@ export const FLOOR_PLANS_DATA: FloorPlanItem[] = [
     facing: "Dual Aspect Sunset Vista",
     image: "/images/assets/plan_tower_b_unit4.jpg",
     details: "Lavish 3 BHK residence with 5 bathrooms, separate servant room with private toilet, walk-in dressing area, dedicated store room, chef's kitchen with utility deck, and extensive outdoor balcony spaces.",
+  },
+];
+
+export interface BrochureSpreadItem {
+  id: string;
+  title: string;
+  spreadNumber: string;
+  tower: string;
+  tag: string;
+  description: string;
+  image: string;
+}
+
+// Authentic High-Resolution 2-Page Spreads directly from the Official Project Brochure
+export const BROCHURE_SPREADS_DATA: BrochureSpreadItem[] = [
+  {
+    id: "spread-site-plan",
+    title: "Master Site Plan & Township Infrastructure",
+    spreadNumber: "Spread 15",
+    tower: "Site Plan",
+    tag: "VDA Approved • Freehold Land",
+    description: "Official master layout showing Tower A (B1+B2+S+30), Tower B (B1+B2+S+29), Future Towers C & D, swimming pool, tennis court, basketball turf, and direct access to NH-19 Highway.",
+    image: "/images/brochure/spread_site_plan_vda_hd.jpg",
+  },
+  {
+    id: "spread-tower-a-cluster-unit1",
+    title: "Tower-A Typical Cluster & Unit Type 1",
+    spreadNumber: "Spread 16",
+    tower: "Tower A",
+    tag: "Cluster Layout & 2BHK+Study (1395 SQ.FT.)",
+    description: "Tower-A cluster plate featuring 4 units per floor and 3 high-speed lifts on the left, paired with the detailed 2BHK+Study residence plan, 3D furnished perspective, and RERA area table on the right.",
+    image: "/images/brochure/spread_tower_a_cluster_unit1_hd.jpg",
+  },
+  {
+    id: "spread-tower-a-unit2-3-4",
+    title: "Tower-A Unit Type 2, 3 & Unit Type 4",
+    spreadNumber: "Spread 17",
+    tower: "Tower A",
+    tag: "3BHK (1695 SQ.FT.) & 2BHK+Study (1395 SQ.FT.)",
+    description: "Detailed 3BHK Unit 2 & 3 floor plate with morning sunlight deck on the left, and 2BHK+Study Unit 4 with dual aspect balconies on the right, both with 3D isometric cutaways.",
+    image: "/images/brochure/spread_tower_a_unit2_3_4_hd.jpg",
+  },
+  {
+    id: "spread-tower-b-cluster-unit1",
+    title: "Tower-B Cluster & 4 BHK Royal Residence",
+    spreadNumber: "Spread 18",
+    tower: "Tower B",
+    tag: "Cluster Layout & 4BHK Royal (2825 SQ.FT.)",
+    description: "Tower-B luxury cluster plan with central courtyard ventilation on the left, and the flagship 4BHK+6TOI+Servant+Store residence with panoramic balconies and 3D architectural render on the right.",
+    image: "/images/brochure/spread_tower_b_cluster_unit1_hd.jpg",
+  },
+  {
+    id: "spread-tower-b-unit2-3-4",
+    title: "Tower-B Unit Type 2, 3 & Unit Type 4",
+    spreadNumber: "Spread 19",
+    tower: "Tower B",
+    tag: "3BHK (1995 SQ.FT.) & 3BHK+Servant (2395 SQ.FT.)",
+    description: "Spacious 3BHK Unit 2 & 3 with walk-in dress and store on the left, and opulent 3BHK+Servant Unit 4 with 5 bathrooms and expansive sundeck overlooking the pool on the right.",
+    image: "/images/brochure/spread_tower_b_unit2_3_4_hd.jpg",
   },
 ];
 

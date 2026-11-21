@@ -16,6 +16,8 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { AMENITIES_LIST } from "@/lib/data";
@@ -32,6 +34,24 @@ export default function AmenitiesHorizontal({
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
+
+  const handleSlide = (direction: "left" | "right") => {
+    if (!trackRef.current) return;
+    const scrollAmount = direction === "left" ? -460 : 460;
+    trackRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+
+    // Sync with GSAP ScrollTrigger if on desktop pinned mode
+    const st = ScrollTrigger.getById("amenities-pin");
+    if (st && window.innerWidth >= 1024) {
+      const step = 0.12;
+      const newProgress = Math.max(
+        0,
+        Math.min(1, st.progress + (direction === "right" ? step : -step))
+      );
+      const targetScroll = st.start + newProgress * (st.end - st.start);
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    }
+  };
 
   // Map icon names to Lucide icons
   const iconMap: Record<string, React.ReactNode> = {
@@ -64,6 +84,7 @@ export default function AmenitiesHorizontal({
           x: () => -totalScroll,
           ease: "none",
           scrollTrigger: {
+            id: "amenities-pin",
             trigger: container,
             pin: true,
             scrub: 1,
@@ -180,15 +201,9 @@ export default function AmenitiesHorizontal({
 
       {/* Horizontal Scrolling Gallery Stage (GSAP Demo 6) */}
       <div className="relative pb-24">
-        {/* Progress bar line */}
-        <div className="hidden lg:block max-w-7xl mx-auto px-8 mb-6">
-          <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden">
-            <div
-              ref={progressBarRef}
-              className="h-full bg-gradient-to-r from-[#DFBF7A] to-[#C9A45C] w-0 transition-all duration-75"
-            />
-          </div>
-        </div>
+
+
+
 
         {/* Gallery Slider Track */}
         <div
@@ -217,11 +232,14 @@ export default function AmenitiesHorizontal({
               {/* Scrim Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
 
-              {/* Top Tag */}
-              <div className="absolute top-4 left-4 z-10">
+              {/* Top Tag & Index */}
+              <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1C0904]/80 backdrop-blur-md border border-[#C9A45C]/40 text-[#C9A45C] text-[10px] font-semibold tracking-wider uppercase">
                   {iconMap[amenity.iconName]}
                   <span>{amenity.category}</span>
+                </span>
+                <span className="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white/90 text-[10px] font-mono border border-white/10">
+                  {idx + 1} / {AMENITIES_LIST.length}
                 </span>
               </div>
 

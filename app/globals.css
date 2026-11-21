@@ -80,3 +80,24 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Continuous Marquee Scroller Animation */
+@keyframes continuousScrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-continuous-scroll {
+  display: flex;
+  width: max-content;
+  animation: continuousScrollLeft 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-continuous-scroll:hover {
+  animation-play-state: paused;
+}

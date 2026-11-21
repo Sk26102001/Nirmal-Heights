@@ -51,6 +51,8 @@ export default function HomePage() {
       <Hero
         onOpenVideo={() => setVideoOpen(true)}
         onOpenBookVisit={() => setBookVisitOpen(true)}
+        onOpenBrochure={() => setBrochureOpen(true)}
+        onOpenLightbox={handleOpenLightbox}
       />
 
       {/* 2. Project Introduction (GSAP Demo 5: Image Mask + Watermark Parallax) */}
@@ -73,20 +75,20 @@ export default function HomePage() {
         onOpenLightbox={handleOpenLightbox}
       />
 
-      {/* 5. Lifestyle & Amenities (GSAP Demo 6: Horizontal Scrolling Gallery) */}
+      {/* 5. Thoughtfully Designed Floor Plans & Clusters */}
+      <FloorPlansSection
+        onOpenBrochure={() => setBrochureOpen(true)}
+        onOpenLightbox={handleOpenLightbox}
+      />
+
+      {/* 6. Lifestyle & Amenities (GSAP Demo 6: Horizontal Scrolling Gallery) */}
       <AmenitiesHorizontal
         onOpenBookVisit={() => setBookVisitOpen(true)}
         onOpenLightbox={handleOpenLightbox}
       />
 
-      {/* 6. Project Gallery (GSAP Demo 2: Infinite Looped Panels) */}
+      {/* 7. Project Gallery (GSAP Demo 2: Infinite Looped Panels) */}
       <ProjectGalleryInfinite
-        onOpenLightbox={handleOpenLightbox}
-      />
-
-      {/* 7. Thoughtfully Designed Floor Plans & Clusters */}
-      <FloorPlansSection
-        onOpenBrochure={() => setBrochureOpen(true)}
         onOpenLightbox={handleOpenLightbox}
       />
 

@@ -49,9 +49,9 @@ export default function ProjectGalleryInfinite({ onOpenLightbox }: GalleryProps)
 
   const galleryItemsRow2 = [
     {
-      title: "Chef's Kitchen & Sunset Deck",
+      title: "Grand Piano Salon & Cultural Lounge",
       category: "Interiors",
-      image: "/images/assets/residence_kitchen.jpg",
+      image: "/images/assets/residence_piano_salon.jpg",
     },
     {
       title: "State-of-the-Art Gymnasium",

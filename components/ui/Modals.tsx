@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   X,
@@ -14,6 +14,10 @@ import {
   FileText,
   Loader2,
   ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Maximize2,
+  Move,
 } from "lucide-react";
 
 interface ModalProps {
@@ -294,7 +298,7 @@ export function VideoModal({ isOpen, onClose }: ModalProps) {
               <Play className="w-8 h-8 fill-[#C9A45C] ml-1" />
             </div>
             <h3 className="text-2xl sm:text-3xl font-serif text-white mb-2">
-              Kashi Nirmal Heights Film
+              Kashi Nirmal Heights
             </h3>
             <p className="text-white/80 text-xs sm:text-sm max-w-md mx-auto font-light">
               An Architectural Marvel by Hafeez Contractor in Transport Nagar, Varanasi.
@@ -317,38 +321,235 @@ export function LightboxModal({
   caption: string;
   onClose: () => void;
 }) {
+  const [zoom, setZoom] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartRef = useRef({ x: 0, y: 0 });
+  const hasDraggedRef = useRef(false);
+
+  // Reset zoom & pan when image changes or modal closes/opens
+  useEffect(() => {
+    if (isOpen) {
+      setZoom(1);
+      setPosition({ x: 0, y: 0 });
+      setIsDragging(false);
+      hasDraggedRef.current = false;
+    }
+  }, [isOpen, src]);
+
+  // Keyboard navigation & zoom shortcuts
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      } else if (e.key === "+" || e.key === "=") {
+        handleZoomIn();
+      } else if (e.key === "-" || e.key === "_") {
+        handleZoomOut();
+      } else if (e.key === "0" || e.key.toLowerCase() === "r") {
+        handleResetZoom();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
+  const handleZoomIn = () => {
+    setZoom((prev) => Math.min(Number((prev + 0.5).toFixed(1)), 4));
+  };
+
+  const handleZoomOut = () => {
+    setZoom((prev) => {
+      const next = Math.max(Number((prev - 0.5).toFixed(1)), 1);
+      if (next === 1) setPosition({ x: 0, y: 0 });
+      return next;
+    });
+  };
+
+  const handleResetZoom = () => {
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleToggleZoom = () => {
+    // If the user was dragging/panning, do not toggle zoom
+    if (hasDraggedRef.current) {
+      hasDraggedRef.current = false;
+      return;
+    }
+    if (zoom === 1) {
+      setZoom(2.2);
+    } else {
+      setZoom(1);
+      setPosition({ x: 0, y: 0 });
+    }
+  };
+
+  // Drag / Pan handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom <= 1) return;
+    e.preventDefault();
+    setIsDragging(true);
+    hasDraggedRef.current = false;
+    dragStartRef.current = {
+      x: e.clientX - position.x,
+      y: e.clientY - position.y,
+    };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || zoom <= 1) return;
+    e.preventDefault();
+    hasDraggedRef.current = true;
+    setPosition({
+      x: e.clientX - dragStartRef.current.x,
+      y: e.clientY - dragStartRef.current.y,
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Wheel zoom
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      setZoom((prev) => Math.min(Number((prev + 0.25).toFixed(2)), 4));
+    } else {
+      setZoom((prev) => {
+        const next = Math.max(Number((prev - 0.25).toFixed(2)), 1);
+        if (next === 1) setPosition({ x: 0, y: 0 });
+        return next;
+      });
+    }
+  };
+
   if (!isOpen || !src) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-in fade-in duration-200"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-4 bg-black/95 backdrop-blur-2xl animate-in fade-in duration-200 select-none"
       onClick={onClose}
     >
+      {/* Top Floating Control Bar */}
+      <div
+        className="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#1C0904]/90 backdrop-blur-md border border-[#C9A45C]/40 text-white shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Zoom Out Button */}
+        <button
+          onClick={handleZoomOut}
+          disabled={zoom <= 1}
+          className="p-1.5 rounded-full hover:bg-white/15 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-white"
+          title="Zoom Out (-)"
+        >
+          <ZoomOut className="w-4 h-4" />
+        </button>
+
+        {/* Current Zoom Percentage Pill */}
+        <span className="font-mono text-xs font-semibold text-[#C9A45C] min-w-[50px] text-center px-1">
+          {Math.round(zoom * 100)}%
+        </span>
+
+        {/* Zoom In Button */}
+        <button
+          onClick={handleZoomIn}
+          disabled={zoom >= 4}
+          className="p-1.5 rounded-full hover:bg-white/15 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-white"
+          title="Zoom In (+)"
+        >
+          <ZoomIn className="w-4 h-4" />
+        </button>
+
+        <span className="w-[1px] h-4 bg-white/20 mx-1" />
+
+        {/* Reset / Fit Button */}
+        <button
+          onClick={handleResetZoom}
+          className="px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/15 transition-colors flex items-center gap-1"
+          title="Reset Zoom (0 / R)"
+        >
+          <RotateCcw className="w-3 h-3 text-[#C9A45C]" />
+          <span>Fit</span>
+        </button>
+
+        <span className="w-[1px] h-4 bg-white/20 mx-1" />
+
+        {/* Download High-Res File */}
+        <a
+          href={src}
+          download={src.split("/").pop() || "floor-plan.jpg"}
+          className="p-1.5 rounded-full hover:bg-white/15 transition-colors text-white"
+          title="Download High-Res Plan"
+        >
+          <Download className="w-4 h-4" />
+        </a>
+      </div>
+
+      {/* Top-Right Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+        className="absolute top-4 sm:top-6 right-4 sm:right-6 z-30 w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-colors shadow-lg cursor-pointer"
+        title="Close (Esc)"
       >
         <X className="w-5 h-5" />
       </button>
 
+      {/* Interactive Main Viewer Canvas */}
       <div
-        className="relative max-w-6xl max-h-[85vh] w-full h-full flex flex-col items-center justify-center"
+        className="relative max-w-7xl max-h-[85vh] w-full h-full flex flex-col items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative w-full h-[75vh]">
-          <Image
-            src={src}
-            alt={caption || "Gallery Preview"}
-            fill
-            sizes="100vw"
-            className="object-contain"
-          />
-        </div>
-        {caption && (
-          <div className="mt-4 px-6 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs sm:text-sm font-serif tracking-wide text-center">
-            {caption}
+        <div
+          className={`relative w-full h-[72vh] sm:h-[78vh] flex items-center justify-center overflow-hidden rounded-2xl ${zoom === 1
+              ? "cursor-zoom-in"
+              : isDragging
+                ? "cursor-grabbing"
+                : "cursor-grab"
+            }`}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onWheel={handleWheel}
+          onClick={handleToggleZoom}
+        >
+          <div
+            style={{
+              transform: `translate(${position.x}px, ${position.y}px) scale(${zoom})`,
+              transition: isDragging
+                ? "none"
+                : "transform 0.18s cubic-bezier(0.2, 0, 0, 1)",
+            }}
+            className="relative w-full h-full flex items-center justify-center will-change-transform"
+          >
+            <Image
+              src={src}
+              alt={caption || "Architectural Floor Plan Preview"}
+              fill
+              sizes="100vw"
+              className="object-contain pointer-events-none p-2 sm:p-4"
+              priority
+            />
           </div>
-        )}
+        </div>
+
+        {/* Bottom Caption & Usage Tip Pill */}
+        <div className="mt-3 flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
+          {caption && (
+            <div className="px-5 py-1.5 rounded-full bg-[#1C0904]/90 border border-[#C9A45C]/30 text-white text-xs sm:text-sm font-serif tracking-wide shadow-md">
+              {caption}
+            </div>
+          )}
+
+          <div className="text-[10.5px] sm:text-[11px] text-white/60 font-light flex items-center gap-2">
+            <span>• Click image to toggle {zoom === 1 ? "2.2x zoom" : "1.0x fit"}</span>
+            <span className="hidden sm:inline">• Drag to pan when zoomed</span>
+            <span className="hidden sm:inline">• Scroll wheel to zoom</span>
+          </div>
+        </div>
       </div>
     </div>
   );

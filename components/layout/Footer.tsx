@@ -244,24 +244,7 @@ export default function Footer() {
         ref={bounceContainerRef}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 origin-bottom will-change-transform pt-4"
       >
-        {/* Subtle Indicator & Interactive Bounce Test Pill */}
-        <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/10">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#C9A45C] animate-ping" />
-            <span className="text-[11px] uppercase tracking-widest text-[#C9A45C] font-medium">
-              Kashi Nirmal Heights • Transport Nagar, Varanasi
-            </span>
-          </div>
 
-          <button
-            onClick={triggerManualBounce}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-[#C9A45C]/20 border border-[#C9A45C]/40 text-[#C9A45C] text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 shadow-md group"
-            title="Click to trigger elastic border bounce"
-          >
-            <Sparkles className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-12" />
-            <span>Bounce Circle Border</span>
-          </button>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
           {/* Col 1: Brand & Bio */}
